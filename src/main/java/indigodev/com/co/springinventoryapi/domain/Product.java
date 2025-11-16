@@ -26,4 +26,14 @@ public class Product extends BaseEntity {
             fetch = FetchType.LAZY
     )
     private List<Movement> movements = new ArrayList<>();
+
+    public void addMovement(Movement movement) {
+        this.movements.add(movement);
+        movement.setProduct(this);
+    }
+
+    public void removeMovement(Movement movement) {
+        this.movements.remove(movement);
+        movement.setProduct(null);
+    }
 }
