@@ -15,10 +15,13 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true,  onlyExplicitlyIncluded = true)
 @SuperBuilder(toBuilder = true)
 public class Product extends BaseEntity {
+
     @Column(nullable = false, unique = true)
     private String name;
+
     @Column(nullable = false)
-    private double stock;
+    private Double stock;
+
     @Builder.Default
     @OneToMany(
             mappedBy = "product",

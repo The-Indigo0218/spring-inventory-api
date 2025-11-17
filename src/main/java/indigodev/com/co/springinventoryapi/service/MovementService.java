@@ -1,10 +1,11 @@
 package indigodev.com.co.springinventoryapi.service;
 
-import indigodev.com.co.springinventoryapi.domain.Movement;
+
+import indigodev.com.co.springinventoryapi.dto.request.movement.CreateMovementRequest;
+import indigodev.com.co.springinventoryapi.dto.response.movement.MovementResponse;
 
 public interface MovementService {
-    Movement save(String name);
-    Movement fiendById(int id);
-    Movement fiendByName(String name);
-    void delete(int id);
+    MovementResponse save(CreateMovementRequest request);
+    MovementResponse findById(Long id);
+    void delete(Long id);
 }

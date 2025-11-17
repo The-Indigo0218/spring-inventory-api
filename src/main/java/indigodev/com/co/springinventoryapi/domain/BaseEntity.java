@@ -22,7 +22,7 @@ public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private long id;
+    private Long id;
 
     @CreatedDate
     @Column(updatable = false, name = "create_at", nullable = false)
