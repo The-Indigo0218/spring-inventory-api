@@ -5,7 +5,7 @@ import indigodev.com.co.springinventoryapi.dto.request.movement.CreateMovementRe
 import indigodev.com.co.springinventoryapi.dto.response.movement.MovementResponse;
 
 public interface MovementService {
-    MovementResponse save(CreateMovementRequest request);
+    MovementResponse createMovement(CreateMovementRequest request);
     MovementResponse findById(Long id);
     void delete(Long id);
 }

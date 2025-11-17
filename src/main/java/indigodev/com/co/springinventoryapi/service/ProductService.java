@@ -4,7 +4,7 @@ import indigodev.com.co.springinventoryapi.dto.request.product.CreateProductRequ
 import indigodev.com.co.springinventoryapi.dto.response.product.ProductResponse;
 
 public interface ProductService {
-    ProductResponse save(CreateProductRequest request);
+    ProductResponse createProduct(CreateProductRequest request);
     ProductResponse findById(Long id);
     ProductResponse findByName(String name);
     void delete(Long id);
