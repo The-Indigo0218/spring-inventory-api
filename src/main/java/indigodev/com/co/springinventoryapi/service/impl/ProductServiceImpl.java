@@ -6,6 +6,7 @@ import indigodev.com.co.springinventoryapi.dto.response.product.ProductResponse;
 import indigodev.com.co.springinventoryapi.exception.ResourceNotFoundException;
 import indigodev.com.co.springinventoryapi.repository.ProductRepository;
 import indigodev.com.co.springinventoryapi.service.ProductService;
+import indigodev.com.co.springinventoryapi.util.InventoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final InventoryMapper  inventoryMapper;
 
     @Override
     public ProductResponse createProduct(CreateProductRequest request) {
@@ -21,27 +23,23 @@ public class ProductServiceImpl implements ProductService {
                 .name(request.name())
                 .build();
         product = productRepository.save(product);
-        return mapToResponse(product);
+        return inventoryMapper.mapToResponseProduct(product);
     }
 
     @Override
     public ProductResponse findById(Long id) {
        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id " + id));
-       return mapToResponse(product);
+        return inventoryMapper.mapToResponseProduct(product);
     }
 
     @Override
     public ProductResponse findByName(String name) {
         Product product = productRepository.findProductByNameIs((name)).orElseThrow(() -> new ResourceNotFoundException("Product not found with name " + name));
-        return mapToResponse(product);
+        return inventoryMapper.mapToResponseProduct(product);
     }
 
     @Override
     public void delete(Long id) {
 
-    }
-
-    private ProductResponse mapToResponse(Product product) {
-        return new ProductResponse(product.getId(), product.getName(), product.getStock(), product.getCreatedAt());
     }
 }
