@@ -16,6 +16,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MovementServiceImpl implements MovementService {
@@ -59,6 +61,15 @@ public class MovementServiceImpl implements MovementService {
 
     @Override
     public void delete(Long id) {
+        Movement movement = movementRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No found movement with id: " + id));
+        movementRepository.delete(movement);
+    }
+
+    @Override
+    public List<MovementResponse>  findByProductName(String name) {
+        Product product = productRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException("No found product with name: " + name));
+        List<Movement> movements = movementRepository.findByProduct_Id(product.getId());
+        return movements.stream().map(inventoryMapper::mapToResponseMovement).toList();
     }
 
 

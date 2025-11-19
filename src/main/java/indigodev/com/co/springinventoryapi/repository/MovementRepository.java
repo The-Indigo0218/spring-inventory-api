@@ -4,6 +4,11 @@ import indigodev.com.co.springinventoryapi.domain.Movement;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface MovementRepository extends JpaRepository<Movement, Long> {
+
+    List<Movement> findByProduct_Id(Long id);
+
 }
