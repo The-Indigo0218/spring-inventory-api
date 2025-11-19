@@ -5,7 +5,6 @@ import indigodev.com.co.springinventoryapi.domain.MovementType;
 import indigodev.com.co.springinventoryapi.domain.Product;
 import indigodev.com.co.springinventoryapi.dto.request.movement.CreateMovementRequest;
 import indigodev.com.co.springinventoryapi.dto.response.movement.MovementResponse;
-import indigodev.com.co.springinventoryapi.dto.response.product.ProductResponse;
 import indigodev.com.co.springinventoryapi.exception.InsufficientStockException;
 import indigodev.com.co.springinventoryapi.exception.InvalidValueException;
 import indigodev.com.co.springinventoryapi.exception.ResourceNotFoundException;
@@ -54,7 +53,8 @@ public class MovementServiceImpl implements MovementService {
 
     @Override
     public MovementResponse findById(Long id) {
-        return null;
+        Movement movement = movementRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No found movement with id: " + id));
+        return inventoryMapper.mapToResponseMovement(movement);
     }
 
     @Override
