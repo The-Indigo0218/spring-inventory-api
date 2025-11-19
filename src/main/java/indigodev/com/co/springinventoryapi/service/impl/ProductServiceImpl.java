@@ -10,6 +10,8 @@ import indigodev.com.co.springinventoryapi.util.InventoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
@@ -34,12 +36,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponse findByName(String name) {
-        Product product = productRepository.findProductByNameIs((name)).orElseThrow(() -> new ResourceNotFoundException("Product not found with name " + name));
+        Product product = productRepository.findByName((name)).orElseThrow(() -> new ResourceNotFoundException("Product not found with name " + name));
         return inventoryMapper.mapToResponseProduct(product);
     }
 
     @Override
     public void delete(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id " + id));
+        productRepository.delete(product);
+    }
 
+    @Override
+    public List<ProductResponse> findAll() {
+        List<Product> products = productRepository.findAll();
+       return products.stream().map(inventoryMapper::mapToResponseProduct).toList();
     }
 }
