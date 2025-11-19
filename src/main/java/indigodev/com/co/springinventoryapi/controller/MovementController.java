@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/movements")
 public class MovementController {
 
-    final MovementService movementService;
+    private final MovementService movementService;
 
     @GetMapping("/{id}")
     public ResponseEntity<MovementResponse> findById(@PathVariable Long id) {
