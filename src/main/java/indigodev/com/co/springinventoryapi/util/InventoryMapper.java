@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class InventoryMapper {
 
-    private ProductResponse mapToResponseProduct(Product product) {
+    public ProductResponse mapToResponseProduct(Product product) {
         return new ProductResponse(product.getId(), product.getName(), product.getStock(), product.getCreatedAt());
     }
 
-    private MovementResponse mapToResponseMovement(Movement movement) {
+    public MovementResponse mapToResponseMovement(Movement movement) {
         ProductResponse productResponse = mapToResponseProduct(movement.getProduct());
         return new MovementResponse(productResponse, movement.getType().toString(), movement.getQuantity(), movement.getCreatedAt());
     }
