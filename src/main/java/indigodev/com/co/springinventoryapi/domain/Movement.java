@@ -1,5 +1,6 @@
 package indigodev.com.co.springinventoryapi.domain;
 
+import indigodev.com.co.springinventoryapi.domain.enums.MovementType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

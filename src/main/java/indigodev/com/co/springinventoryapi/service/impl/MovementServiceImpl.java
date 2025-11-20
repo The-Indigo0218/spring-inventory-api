@@ -1,7 +1,7 @@
 package indigodev.com.co.springinventoryapi.service.impl;
 
 import indigodev.com.co.springinventoryapi.domain.Movement;
-import indigodev.com.co.springinventoryapi.domain.MovementType;
+import indigodev.com.co.springinventoryapi.domain.enums.MovementType;
 import indigodev.com.co.springinventoryapi.domain.Product;
 import indigodev.com.co.springinventoryapi.dto.request.movement.CreateMovementRequest;
 import indigodev.com.co.springinventoryapi.dto.response.movement.MovementResponse;

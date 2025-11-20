@@ -1,4 +1,4 @@
-package indigodev.com.co.springinventoryapi.domain;
+package indigodev.com.co.springinventoryapi.domain.enums;
 
 
 public enum MovementType {
