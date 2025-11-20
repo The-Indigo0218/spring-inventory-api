@@ -17,13 +17,13 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id){
+    public ResponseEntity<ProductResponse> findById(@PathVariable Long id){
         ProductResponse response = productService.findById(id);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponse> createProduct(@RequestBody CreateProductRequest request){
+    public ResponseEntity<ProductResponse> create(@RequestBody CreateProductRequest request){
         ProductResponse response = productService.createProduct(request);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -31,13 +31,13 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public  ResponseEntity<ProductResponse> deleteProductById(@PathVariable Long id){
+    public  ResponseEntity<ProductResponse> delete(@PathVariable Long id){
         productService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductResponse>> getAllProducts(){
+    public ResponseEntity<List<ProductResponse>> findAll(){
         List<ProductResponse> response = productService.findAll();
         return ResponseEntity.ok(response);
     }
