@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/movements")
@@ -27,6 +29,11 @@ public class MovementController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
+    }
+
+    @GetMapping("/product/{name}")
+    public ResponseEntity<List<MovementResponse>> findByProductName(@PathVariable String name) {
+        return ResponseEntity.ok(movementService.findByProductName(name));
     }
 
 }
