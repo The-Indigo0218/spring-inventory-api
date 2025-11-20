@@ -24,7 +24,7 @@ public class MovementController {
     }
 
     @PostMapping
-    public ResponseEntity<MovementResponse> save(@RequestBody CreateMovementRequest request) {
+    public ResponseEntity<MovementResponse> create(@RequestBody CreateMovementRequest request) {
         MovementResponse response = movementService.createMovement(request);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
