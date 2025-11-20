@@ -1,6 +1,6 @@
 package indigodev.com.co.springinventoryapi.domain.enums;
 
-public enum UserRol {
+public enum UserRole {
     ADMIN,
     INVENTORY_MANAGER
 }
