@@ -11,8 +11,10 @@ import indigodev.com.co.springinventoryapi.security.JwtService;
 import indigodev.com.co.springinventoryapi.service.AuthenticationService;
 import indigodev.com.co.springinventoryapi.util.EnumMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +53,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return new  AuthenticationResponse(jwtToken);
+    }
+
+    private void validateRoleHierarchy(Authentication currentAuth, String roleToCreateSt ){
+        String currentRoleStr = currentAuth.getAuthorities().iterator().next().getAuthority();
+
+        UserRole currentRole = enumMapper.userRoleMapper(currentRoleStr);
+        UserRole roleToCreate = enumMapper.userRoleMapper(roleToCreateSt);
+
+        if(currentRole.equals(UserRole.ADMIN) && roleToCreate.equals(UserRole.SUPER_ADMIN) ) {
+            throw new AccessDeniedException("Admin cannot create a super_admin role");
+        }
+        if(currentRole.equals(UserRole.ADMIN) && roleToCreate.equals(UserRole.ADMIN) ) {
+            throw new AccessDeniedException("Admin cannot create a admin role");
+        }
+        if(currentRole.equals(UserRole.INVENTORY_MANAGER) ) {
+            throw new AccessDeniedException("Inventory manager cannot create any role");
+        }
     }
 }

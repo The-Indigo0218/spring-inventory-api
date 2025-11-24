@@ -7,6 +7,7 @@ import indigodev.com.co.springinventoryapi.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
+    @PreAuthorize("hasAnyAuthority('SUPER_ADMIN', 'ADMIN')")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest registerRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(authenticationService.register(registerRequest));
     }
