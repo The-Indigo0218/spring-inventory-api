@@ -7,7 +7,7 @@ import indigodev.com.co.springinventoryapi.dto.response.product.ProductResponse;
 import org.springframework.stereotype.Component;
 
 @Component
-public class InventoryMapper {
+public class ResponseMapper {
 
     public ProductResponse mapToResponseProduct(Product product) {
         return new ProductResponse(product.getId(), product.getName(), product.getStock(), product.getCreatedAt());

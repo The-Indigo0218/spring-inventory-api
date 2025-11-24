@@ -11,7 +11,7 @@ import indigodev.com.co.springinventoryapi.exception.ResourceNotFoundException;
 import indigodev.com.co.springinventoryapi.repository.MovementRepository;
 import indigodev.com.co.springinventoryapi.repository.ProductRepository;
 import indigodev.com.co.springinventoryapi.service.MovementService;
-import indigodev.com.co.springinventoryapi.util.InventoryMapper;
+import indigodev.com.co.springinventoryapi.util.ResponseMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class MovementServiceImpl implements MovementService {
 
     private final MovementRepository movementRepository;
     private final ProductRepository productRepository;
-    private final InventoryMapper inventoryMapper;
+    private final ResponseMapper responseMapper;
 
     @Transactional
     @Override
@@ -50,13 +50,13 @@ public class MovementServiceImpl implements MovementService {
 
        product.addMovement(movement);
        movement =  movementRepository.save(movement);
-       return inventoryMapper.mapToResponseMovement(movement);
+       return responseMapper.mapToResponseMovement(movement);
     }
 
     @Override
     public MovementResponse findById(Long id) {
         Movement movement = movementRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No found movement with id: " + id));
-        return inventoryMapper.mapToResponseMovement(movement);
+        return responseMapper.mapToResponseMovement(movement);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class MovementServiceImpl implements MovementService {
     public List<MovementResponse>  findByProductName(String name) {
         Product product = productRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException("No found product with name: " + name));
         List<Movement> movements = movementRepository.findByProduct_Id(product.getId());
-        return movements.stream().map(inventoryMapper::mapToResponseMovement).toList();
+        return movements.stream().map(responseMapper::mapToResponseMovement).toList();
     }
 
 

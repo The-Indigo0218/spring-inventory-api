@@ -6,7 +6,7 @@ import indigodev.com.co.springinventoryapi.dto.response.product.ProductResponse;
 import indigodev.com.co.springinventoryapi.exception.ResourceNotFoundException;
 import indigodev.com.co.springinventoryapi.repository.ProductRepository;
 import indigodev.com.co.springinventoryapi.service.ProductService;
-import indigodev.com.co.springinventoryapi.util.InventoryMapper;
+import indigodev.com.co.springinventoryapi.util.ResponseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final InventoryMapper  inventoryMapper;
+    private final ResponseMapper responseMapper;
 
     @Override
     public ProductResponse createProduct(CreateProductRequest request) {
@@ -25,19 +25,19 @@ public class ProductServiceImpl implements ProductService {
                 .name(request.name())
                 .build();
         product = productRepository.save(product);
-        return inventoryMapper.mapToResponseProduct(product);
+        return responseMapper.mapToResponseProduct(product);
     }
 
     @Override
     public ProductResponse findById(Long id) {
        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id " + id));
-        return inventoryMapper.mapToResponseProduct(product);
+        return responseMapper.mapToResponseProduct(product);
     }
 
     @Override
     public ProductResponse findByName(String name) {
         Product product = productRepository.findByName((name)).orElseThrow(() -> new ResourceNotFoundException("Product not found with name " + name));
-        return inventoryMapper.mapToResponseProduct(product);
+        return responseMapper.mapToResponseProduct(product);
     }
 
     @Override
@@ -49,6 +49,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductResponse> findAll() {
         List<Product> products = productRepository.findAll();
-       return products.stream().map(inventoryMapper::mapToResponseProduct).toList();
+       return products.stream().map(responseMapper::mapToResponseProduct).toList();
     }
 }
