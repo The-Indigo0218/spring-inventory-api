@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -34,6 +35,11 @@ public class MovementController {
     @GetMapping("/product/{name}")
     public ResponseEntity<List<MovementResponse>> findByProductName(@PathVariable String name) {
         return ResponseEntity.ok(movementService.findByProductName(name));
+    }
+
+    @PutMapping("/{id}/evidence")
+    public ResponseEntity<MovementResponse> uploadEvidence(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+        return ResponseEntity.ok(movementService.uploadEvidence(id, file));
     }
 
 }

@@ -11,10 +11,12 @@ import indigodev.com.co.springinventoryapi.exception.ResourceNotFoundException;
 import indigodev.com.co.springinventoryapi.repository.MovementRepository;
 import indigodev.com.co.springinventoryapi.repository.ProductRepository;
 import indigodev.com.co.springinventoryapi.service.MovementService;
+import indigodev.com.co.springinventoryapi.service.StorageService;
 import indigodev.com.co.springinventoryapi.util.ResponseMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class MovementServiceImpl implements MovementService {
     private final MovementRepository movementRepository;
     private final ProductRepository productRepository;
     private final ResponseMapper responseMapper;
+    private final StorageService storageService;
 
     @Transactional
     @Override
@@ -70,6 +73,15 @@ public class MovementServiceImpl implements MovementService {
         Product product = productRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException("No found product with name: " + name));
         List<Movement> movements = movementRepository.findByProduct_Id(product.getId());
         return movements.stream().map(responseMapper::mapToResponseMovement).toList();
+    }
+
+    @Override
+    public MovementResponse uploadEvidence(Long id, MultipartFile file){
+        Movement movement = movementRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No found movement with id: " + id));
+        String fileLocation =  storageService.store(file);
+        movement.setImageUrl(fileLocation);
+        movement = movementRepository.save(movement);
+        return responseMapper.mapToResponseMovement(movement);
     }
 
 

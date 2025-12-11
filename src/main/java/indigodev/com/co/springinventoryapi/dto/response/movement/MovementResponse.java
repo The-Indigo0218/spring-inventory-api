@@ -4,5 +4,5 @@ import indigodev.com.co.springinventoryapi.dto.response.product.ProductResponse;
 
 import java.time.LocalDateTime;
 
-public record MovementResponse(ProductResponse product, String type, Double quantity, LocalDateTime createdAt) {
+public record MovementResponse(ProductResponse product, String type, Double quantity, LocalDateTime createdAt, String imageUrl) {
 }

@@ -15,7 +15,7 @@ public class ResponseMapper {
 
     public MovementResponse mapToResponseMovement(Movement movement) {
         ProductResponse productResponse = mapToResponseProduct(movement.getProduct());
-        return new MovementResponse(productResponse, movement.getType().toString(), movement.getQuantity(), movement.getCreatedAt());
+        return new MovementResponse(productResponse, movement.getType().toString(), movement.getQuantity(), movement.getCreatedAt(), movement.getImageUrl());
     }
 
 

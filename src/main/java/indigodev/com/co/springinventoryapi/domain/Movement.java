@@ -25,4 +25,6 @@ public class Movement extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
+    @Column(name = "image_url")
+    private String imageUrl;
 }
