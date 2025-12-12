@@ -135,4 +135,4 @@ escalabilidad:
 
 ------------------------------------------------------------------------
 
-Desarrollado con ☕ y [Miguel González](www.linkedin.com/in/miguel-gonzalez-p-dev).
+Desarrollado con ☕ y [Miguel González](https://www.google.com/search?q=https://www.linkedin.com/in/miguel-gonzalez-p-dev).
