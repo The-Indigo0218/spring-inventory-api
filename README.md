@@ -1,4 +1,4 @@
-# 📦 Sistema de Control de Almacén (SCA) - API
+# 📦 Sistema de Control de Almacén (SCA) - API.
 
 Una API RESTful robusta y escalable para la gestión de inventarios,
 desarrollada con **Java 17** y **Spring Boot 3**. Este proyecto
