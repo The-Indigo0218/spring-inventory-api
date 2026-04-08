@@ -5,7 +5,7 @@ desarrollada con **Java 17** y **Spring Boot 3**. Este proyecto
 implementa una arquitectura profesional enfocada en la seguridad, la
 integridad de datos y las buenas prácticas de ingeniería de software.
 
-## 🚀 Características Principales
+## 🚀 Características Principales.
 
 -   **Gestión de Productos:** CRUD completo con validaciones de negocio.
 -   **Control de Movimientos:** Registro transaccional de Entradas y
