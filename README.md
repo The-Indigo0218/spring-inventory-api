@@ -19,7 +19,7 @@ integridad de datos y las buenas prácticas de ingeniería de software.
 -   **Documentación Viva:** Interfaz interactiva con **Swagger UI /
     OpenAPI**.
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack.
 
 -   **Lenguaje:** Java 17
 -   **Framework:** Spring Boot 3.5.7
